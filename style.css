@@ -292,6 +292,7 @@ textarea {
   height: 149px;
 }
 
+
 /* ═══════════════════════════════════════════════
    SMAGSVÆLGER
 ═══════════════════════════════════════════════ */
@@ -327,12 +328,10 @@ textarea {
   padding-right: 4px;
 }
 
-/* Scrollbar */
 #smagsPicker::-webkit-scrollbar { width: 5px; }
 #smagsPicker::-webkit-scrollbar-track { background: transparent; }
 #smagsPicker::-webkit-scrollbar-thumb { background: rgb(163,157,143); border-radius: 3px; }
 
-/* Kategori-knap (øverste niveau) */
 .smagsKat {
   width: 100%;
   display: flex;
@@ -349,12 +348,11 @@ textarea {
   text-align: left;
   transition: background 0.15s;
 }
-.smagsKat:hover  { background: rgb(210, 204, 194); }
-.smagsKat.aktiv  { background: rgb(163, 157, 143); color: rgb(251,247,236); }
+.smagsKat:hover { background: rgb(210, 204, 194); }
+.smagsKat.aktiv { background: rgb(163, 157, 143); color: rgb(251,247,236); }
 
 .pil { font-size: 10px; opacity: 0.7; }
 
-/* Panel under en åben kategori */
 .smagsPanel {
   display: flex;
   flex-direction: column;
@@ -364,7 +362,6 @@ textarea {
   margin-left: 6px;
 }
 
-/* Underkategori-knap */
 .smagsUnder {
   width: 100%;
   display: flex;
@@ -384,7 +381,6 @@ textarea {
 .smagsUnder:hover { background: rgb(225, 218, 208); }
 .smagsUnder.aktiv { background: rgb(190, 184, 172); color: rgb(251,247,236); }
 
-/* Chips-wrapper */
 .smagsChips {
   display: flex;
   flex-wrap: wrap;
@@ -392,9 +388,12 @@ textarea {
   padding: 5px 0;
 }
 
-/* Individuel smags-chip */
+/* Chip — farvedot + tekst */
 .smagsChip {
-  padding: 3px 9px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px 3px 6px;
   border: 1px solid rgb(163, 157, 143);
   border-radius: 20px;
   background: transparent;
@@ -402,22 +401,124 @@ textarea {
   font-size: 11px;
   cursor: pointer;
   color: rgb(80, 76, 68);
-  transition: background 0.12s, color 0.12s;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
 }
 .smagsChip:hover { background: rgb(210, 204, 194); }
+
+/* Valgt chip — bruger farvedotten som accentfarve */
 .smagsChip.valgt {
-  background: rgb(100, 140, 0);
-  border-color: rgb(80, 115, 0);
+  background: var(--chip-farve, rgb(100,140,0));
+  border-color: rgba(0,0,0,0.25);
   color: white;
   font-weight: 600;
 }
 
-#linje2 {
-  padding: 0;
+/* Deaktiveret chip */
+.smagsChip.disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+/* Lille farvedot inde i chippen */
+.chipDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.5);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   #p5Input layout
+═══════════════════════════════════════════════ */
+
+#p5Input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 220px;
+}
+
+#p5Input p {
+  margin: 6px 0 2px 0 !important;
+  padding: 0 !important;
+}
+
+#p5Input input[type="range"] {
+  width: 200px;
+  accent-color: rgb(114, 110, 99);
+}
+
+/* ═══════════════════════════════════════════════
+   FARVE-PANEL
+═══════════════════════════════════════════════ */
+
+#farvePanel {
+  width: 220px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(163, 157, 143);
+}
+
+.farvePanel-titel {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 6px 0 !important;
+  padding: 0 !important;
+}
+
+.farvePanel-hint {
+  font-size: 12px;
+  color: rgb(140, 134, 122);
   margin: 0;
-  width: 1px;
-  height: 100%;
-  background-color: rgb(163, 157, 143);
+  line-height: 1.4;
+}
+
+.farveRække {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 5px;
+}
+
+.farveDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+.farveInput {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgb(163, 157, 143);
+  border-radius: 6px;
+  padding: 2px;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.farveInput::-webkit-color-swatch-wrapper { padding: 0; border-radius: 4px; }
+.farveInput::-webkit-color-swatch { border: none; border-radius: 4px; }
+
+.farveHex {
+  font-size: 11px;
+  font-family: monospace;
+  color: rgb(100, 95, 85);
+  min-width: 52px;
+}
+
+.farveLabel {
+  font-size: 12px;
+  color: rgb(70, 66, 58);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ═══════════════════════════════════════════════
@@ -444,107 +545,10 @@ textarea {
   color: rgb(60, 57, 50);
 }
 
-/* ═══════════════════════════════════════════════
-   FARVE-PANEL (gradientfarver i #p5Input)
-═══════════════════════════════════════════════ */
-
-#farvePanel {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 220px;
-  margin-top: 8px;
-  padding-top: 10px;
-  border-top: 1px solid rgb(163, 157, 143);
-}
-
-.farvePanel-titel {
-  font-size: 15px;
-  font-weight: 600;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.farvePanel-hint {
-  font-size: 12px;
-  color: rgb(140, 134, 122);
+#linje2 {
+  padding: 0;
   margin: 0;
-  padding: 0;
-  line-height: 1.4;
-}
-
-/* Container for alle farve-rækker */
-.farveRækker {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-/* Én farve-række: dot + color-input + hex + label */
-.farveRække {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  height: 28px;
-}
-
-/* Farveknap (color picker) */
-.farveInput {
-  width: 28px;
-  height: 28px;
-  border: 1px solid rgb(163, 157, 143);
-  border-radius: 6px;
-  padding: 2px;
-  background: transparent;
-  cursor: pointer;
-  flex-shrink: 0;
-  box-sizing: border-box;
-  -webkit-appearance: none;
-  appearance: none;
-  overflow: hidden;
-}
-
-.farveInput::-webkit-color-swatch-wrapper {
-  padding: 0;
-  border-radius: 4px;
-}
-.farveInput::-webkit-color-swatch {
-  border: none;
-  border-radius: 4px;
-}
-
-/* Farvet cirkel/dot */
-.farveDot {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.15);
-  flex-shrink: 0;
-}
-
-/* Hex-kode tekst */
-.farveHex {
-  font-size: 11px;
-  font-family: monospace;
-  color: rgb(100, 95, 85);
-  min-width: 52px;
-}
-
-/* Kategori-navn */
-.farveLabel {
-  font-size: 12px;
-  color: rgb(70, 66, 58);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Gradient preview bar */
-.gradientPreview {
-  width: 100%;
-  height: 12px;
-  border-radius: 6px;
-  border: 1px solid rgba(0,0,0,0.1);
-  margin-top: 2px;
+  width: 1px;
+  height: 100%;
+  background-color: rgb(163, 157, 143);
 }
