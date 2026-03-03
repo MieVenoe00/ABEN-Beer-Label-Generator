@@ -552,3 +552,26 @@ textarea {
   height: 100%;
   background-color: rgb(163, 157, 143);
 }
+
+/* ─── Fjern-knap i farve-panel ─── */
+.fjernSmagBtn {
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgb(185, 179, 168);
+  border-radius: 50%;
+  background: transparent;
+  font-size: 10px;
+  color: rgb(120, 115, 105);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s;
+}
+.fjernSmagBtn:hover {
+  background: rgb(200, 60, 60);
+  border-color: rgb(200, 60, 60);
+  color: white;
+}

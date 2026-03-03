@@ -345,12 +345,23 @@ function renderFarvepanel() {
     lbl.className = "farveLabel";
     lbl.textContent = navn;
 
+    const fjernBtn = document.createElement("button");
+    fjernBtn.className = "fjernSmagBtn";
+    fjernBtn.innerHTML = "&#x2715;";
+    fjernBtn.title = `Fjern ${navn}`;
+    fjernBtn.onclick = () => {
+      valgteSmage.delete(navn);
+      opdaterP5Palette();
+      renderFarvepanel();
+      renderSmagsPicker();
+      opdaterLabel();
+    };
+
     input.addEventListener("input", () => {
       brugerFarver[navn] = input.value;
       dot.style.background = input.value;
       hexTxt.textContent   = input.value;
       opdaterP5Palette();
-      // Opdater gradient bar live
       const nyStops = [...valgteSmage.keys()].map(getSmagFarve).join(", ");
       const b = document.getElementById("gradientBar");
       if (b) b.style.background = `linear-gradient(to right,${nyStops})`;
@@ -360,6 +371,7 @@ function renderFarvepanel() {
     row.appendChild(input);
     row.appendChild(hexTxt);
     row.appendChild(lbl);
+    row.appendChild(fjernBtn);
     panel.appendChild(row);
   }
 }
