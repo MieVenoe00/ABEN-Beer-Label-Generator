@@ -85,14 +85,10 @@ function opdaterP5Palette() {
   }
 }
 
-// ─── Farve-panel i #p5Input ───────────────────────────────────────────────────
+// ─── Farve-panel i #farvePanel (statisk i HTML) ───────────────────────────────
 function renderFarvepanel() {
-  let panel = document.getElementById("farvePanel");
-  if (!panel) {
-    panel = document.createElement("div");
-    panel.id = "farvePanel";
-    document.getElementById("p5Input").appendChild(panel);
-  }
+  const panel = document.getElementById("farvePanel");
+  if (!panel) return;
 
   const aktive = getAktiveKategorier();
   panel.innerHTML = "";
@@ -255,5 +251,6 @@ function opdaterLabel() {
 document.addEventListener("DOMContentLoaded", () => {
   renderSmagsPicker();
   opdaterLabel();
-  setTimeout(() => { renderFarvepanel(); opdaterP5Palette(); }, 150);
+  renderFarvepanel();
+  opdaterP5Palette();
 });

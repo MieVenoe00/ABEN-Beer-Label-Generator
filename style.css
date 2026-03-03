@@ -132,6 +132,25 @@ textarea {
   background-color: rgb(163, 157, 143);
 }
 
+#p5Input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 220px;
+}
+
+/* p5.js sætter margin på sine <p>-elementer — nulstil dem */
+#p5Input p {
+  margin: 6px 0 2px 0 !important;
+}
+
+/* p5.js sliders */
+#p5Input input[type="range"] {
+  width: 200px;
+  accent-color: rgb(114, 110, 99);
+}
+
 .sliderLabel {
   font-size: 15px;
   font-weight: 500;
