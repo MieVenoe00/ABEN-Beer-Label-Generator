@@ -122,6 +122,7 @@ input[type="text"]:focus {
 textarea {
   resize: none;
   font-size: 15px;
+  max-height: 200px;
 }
 
 #linje {
@@ -197,8 +198,8 @@ textarea {
 #labelContent {
   width: 380px;
   height: auto;
-  background-color: rgb(250, 243, 237);
-  background-color: var(--bagrunds-farve);
+  /* background-color: rgb(250, 243, 237);
+  background-color: var(--bagrunds-farve); */
   /* background-color: seagreen; */
   display: flex;
   flex-direction: column;
@@ -211,8 +212,8 @@ textarea {
 #labelInfo {
   width: 425px;
   height: 708px;
-  background-color: rgb(250, 243, 237);
-  background-color: var(--bagrunds-farve);
+  /* background-color: rgb(250, 243, 237);
+  background-color: var(--bagrunds-farve); */
   /* background-color: royalblue; */
   display: flex;
   flex-direction: column;
@@ -249,6 +250,10 @@ textarea {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
+}
+
+#doseInfo h2 {
+  font-weight: 700;
 }
 
 #bryggeriet {
@@ -292,7 +297,6 @@ textarea {
   height: 149px;
 }
 
-
 /* ═══════════════════════════════════════════════
    SMAGSVÆLGER
 ═══════════════════════════════════════════════ */
@@ -323,14 +327,21 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  max-height: 340px;
+  max-height: 200px;
   overflow-y: auto;
   padding-right: 4px;
 }
 
-#smagsPicker::-webkit-scrollbar { width: 5px; }
-#smagsPicker::-webkit-scrollbar-track { background: transparent; }
-#smagsPicker::-webkit-scrollbar-thumb { background: rgb(163,157,143); border-radius: 3px; }
+#smagsPicker::-webkit-scrollbar {
+  width: 5px;
+}
+#smagsPicker::-webkit-scrollbar-track {
+  background: transparent;
+}
+#smagsPicker::-webkit-scrollbar-thumb {
+  background: rgb(163, 157, 143);
+  border-radius: 3px;
+}
 
 .smagsKat {
   width: 100%;
@@ -348,10 +359,18 @@ textarea {
   text-align: left;
   transition: background 0.15s;
 }
-.smagsKat:hover { background: rgb(210, 204, 194); }
-.smagsKat.aktiv { background: rgb(163, 157, 143); color: rgb(251,247,236); }
+.smagsKat:hover {
+  background: rgb(210, 204, 194);
+}
+.smagsKat.aktiv {
+  background: rgb(163, 157, 143);
+  color: rgb(251, 247, 236);
+}
 
-.pil { font-size: 10px; opacity: 0.7; }
+.pil {
+  font-size: 10px;
+  opacity: 0.7;
+}
 
 .smagsPanel {
   display: flex;
@@ -378,8 +397,13 @@ textarea {
   text-align: left;
   transition: background 0.15s;
 }
-.smagsUnder:hover { background: rgb(225, 218, 208); }
-.smagsUnder.aktiv { background: rgb(190, 184, 172); color: rgb(251,247,236); }
+.smagsUnder:hover {
+  background: rgb(225, 218, 208);
+}
+.smagsUnder.aktiv {
+  background: rgb(190, 184, 172);
+  color: rgb(251, 247, 236);
+}
 
 .smagsChips {
   display: flex;
@@ -401,14 +425,19 @@ textarea {
   font-size: 11px;
   cursor: pointer;
   color: rgb(80, 76, 68);
-  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  transition:
+    background 0.12s,
+    color 0.12s,
+    border-color 0.12s;
 }
-.smagsChip:hover { background: rgb(210, 204, 194); }
+.smagsChip:hover {
+  background: rgb(210, 204, 194);
+}
 
 /* Valgt chip — bruger farvedotten som accentfarve */
 .smagsChip.valgt {
-  background: var(--chip-farve, rgb(100,140,0));
-  border-color: rgba(0,0,0,0.25);
+  background: var(--chip-farve, rgb(100, 140, 0));
+  border-color: rgba(0, 0, 0, 0.25);
   color: white;
   font-weight: 600;
 }
@@ -426,7 +455,7 @@ textarea {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   flex-shrink: 0;
 }
 
@@ -453,6 +482,15 @@ textarea {
 }
 
 /* ═══════════════════════════════════════════════
+   STILART-PANEL
+═══════════════════════════════════════════════ */
+
+#stilartWrapper {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(163, 157, 143);
+}
+
+/* ═══════════════════════════════════════════════
    FARVE-PANEL
 ═══════════════════════════════════════════════ */
 
@@ -460,7 +498,9 @@ textarea {
   width: 220px;
   margin-top: 4px;
   padding-top: 10px;
+  padding-bottom: 10px;
   border-top: 1px solid rgb(163, 157, 143);
+  border-bottom: 1px solid rgb(163, 157, 143);
 }
 
 .farvePanel-titel {
@@ -488,7 +528,7 @@ textarea {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
 }
 
@@ -503,8 +543,14 @@ textarea {
   flex-shrink: 0;
   box-sizing: border-box;
 }
-.farveInput::-webkit-color-swatch-wrapper { padding: 0; border-radius: 4px; }
-.farveInput::-webkit-color-swatch { border: none; border-radius: 4px; }
+.farveInput::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 4px;
+}
+.farveInput::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
 
 .farveHex {
   font-size: 11px;
@@ -568,10 +614,58 @@ textarea {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.12s, color 0.12s;
+  transition:
+    background 0.12s,
+    color 0.12s;
 }
 .fjernSmagBtn:hover {
   background: rgb(200, 60, 60);
   border-color: rgb(200, 60, 60);
   color: white;
+}
+
+/* ═══════════════════════════════════════════════
+   ØL-STILART SELECT
+═══════════════════════════════════════════════ */
+
+#stilartWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.stilartLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(80, 76, 68);
+}
+
+.stilartSelect {
+  width: 220px;
+  height: 34px;
+  font-size: 13px;
+  font-family: helvetica-lt-pro, sans-serif;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border-radius: 7px;
+  border: 1px solid rgb(163, 157, 143);
+  border-left-width: 6px;
+  border-left-color: transparent;
+  background-color: rgb(250, 243, 237);
+  color: rgb(60, 57, 50);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition:
+    border-left-color 0.2s,
+    background-color 0.2s;
+}
+
+.stilartSelect:focus {
+  outline: none;
+  border-color: rgb(114, 110, 99);
 }

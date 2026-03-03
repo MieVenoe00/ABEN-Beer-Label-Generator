@@ -3,6 +3,15 @@ let streg;
 let zigzag;
 let ringAfstand;
 
+function erMørBaggrund() {
+  const hex = window.labelBaggrund;
+  if (!hex || hex.length < 7) return false;
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) < 128;
+}
+
 function multiLerp(farver, amt) {
   if (!farver || farver.length < 2) return color(200, 240, 0);
   const seg    = farver.length - 1;
@@ -41,10 +50,14 @@ function draw() {
   }
 
   blendMode(BLEND);
-  background(250, 243, 237);
+  if (window.labelBaggrund) {
+    background(color(window.labelBaggrund));
+  } else {
+    background(250, 243, 237);
+  }
   noFill();
   strokeWeight(streg.value());
-  blendMode(MULTIPLY);
+  blendMode(erMørBaggrund() ? SCREEN : MULTIPLY);
 
   const peakHeight = 100;
   for (let y = height + peakHeight; y > -peakHeight; y -= ringAfstand.value()) {
