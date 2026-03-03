@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ÅBEN Label Generator</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+
+  <body>
+    <header id="interface" class="interface_header">
+      <h1 id="overskrift">ÅBEN Label Generator</h1>
+      <p id="pTekst">Indtast oplysningerne på øllen.</p>
+      <nav class="interface_content">
+        <div id="inputElementer">
+          <input
+            type="text"
+            placeholder="Indtast navn på øllen"
+            id="olNavn"
+            class="labelInput"
+          />
+          <input
+            type="text"
+            placeholder="Indtast type af øllen"
+            id="olType"
+            class="labelInput"
+          />
+          <input
+            type="text"
+            placeholder="Indtast alkoholprocenten"
+            id="alcoholpc"
+            class="labelInput"
+          />
+        </div>
+
+        <textarea class="tekstBox" id="tekstOl" name="omOl" rows="4" cols="50">
+Indtast lille tekst om øllen</textarea
+        >
+
+        <textarea
+          class="tekstBox"
+          id="ingredienser"
+          name="ingredienser"
+          rows="4"
+          cols="50"
+        >
+Indtast ingredienser på øllen</textarea
+        >
+        <hr id="linje" />
+        <section id="p5Input"></section>
+      </nav>
+      <section class="gemKnapper">
+        <button class="knapperne" id="gemPDF">Gem label som PDF</button>
+        <button class="knapperne" id="gemJPG">Gem label som JPG</button>
+        <button class="knapperne" id="gemSVG">Gem label som SVG</button>
+      </section>
+    </header>
+
+    <!-- ---------------LABELEN ---------- -->
+    <main class="label">
+      <article id="labelContent">
+        <section id="contentText">
+          <h1 id="navn">Bryg 61</h1>
+          <h2 id="type">IPA - New England / Hazy</h2>
+        </section>
+
+        <figure id="contentLogo">
+          <svg
+            id="logo"
+            data-name="Lag 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 642.8012 197.36"
+          >
+            <path
+              d="M77.51,55.57c9.2-5.02,15.45-14.77,15.45-25.99,0-16.34-13.24-29.58-29.58-29.58s-29.58,13.24-29.58,29.58c0,11.22,6.25,20.98,15.45,25.99-11.2,3.54-25.71,13.14-29.87,39.2L0,197.32h8.45l7.61-43.84h95.3l7.61,43.84h8.45l-19.38-102.55c-4.16-26.05-19.03-35.66-30.52-39.2h-.01ZM40.97,29.58c0-12.38,10.03-22.41,22.41-22.41s22.41,10.03,22.41,22.41-10.03,22.41-22.41,22.41-22.41-10.03-22.41-22.41ZM17.43,145.53l8.82-50.77s4.84-35.02,36.94-34.76c32.1-.25,37.96,34.76,37.96,34.76l8.82,50.77H17.43Z"
+            />
+            <path
+              d="M267.4,112c19.13-3.77,19.43-28.58,19.43-28.58.01-34.1-33.43-32.22-33.43-32.22h-71.98l.63,146.06h71.42s48.89,3.63,48.89-45.11c0-28.93-20.41-38.9-34.96-40.14v-.01ZM189.24,57.37s50.32-.03,57.35-.04c7.04,0,33.4-1.11,33.4,26.21s-29.65,26.41-29.65,26.41l-61.11.1v-52.69l.01.01ZM251.52,190.66h-62.24l.04-73.51h65.18s40.68-1.62,40.68,34.81c0,41-43.66,38.7-43.66,38.7h0Z"
+            />
+            <polygon
+              points="360.46 197.35 466.5 197.31 466.5 189.98 368.41 190.01 368.41 118.64 450.99 118.64 450.99 111.1 368.41 111.1 368.41 61.63 466.5 61.63 466.5 53.99 360.46 53.99 360.46 197.35"
+            />
+            <path
+              d="M642.8,178.98V54.22h-7.97v120.59s.78,13.95-7.88,14.19c-6.01.17-16.09-13.47-16.09-13.47l-85.24-121.3h-12.02v143.13h7.71l.02-134.51,82.21,117.36s13.68,19.2,26.22,16.8c13.43-2.57,13.04-18.03,13.04-18.03h0Z"
+            />
+          </svg>
+        </figure>
+      </article>
+      <section id="labelInfo">
+        <div id="doseInfo">
+          <h2 id="doseindhold">44cl. /</h2>
+          <h2 id="doseAlc">Alc. 5.1% vol.</h2>
+        </div>
+        <p id="omol">
+          Our first ever beer. It is called Bryg nr. 61 (brew no. 61), as it
+          took 60 attempts before ending up with "Bryg nr. 61 - IPA". It is a
+          fruity and hazy New England Pale Ale made primarily with Citra and
+          Mosiac. Only very modest bitterness but high aroma of exotic fruits.
+          Delicious for a summer day or a drink in the bar. It has now become a
+          classic for us.
+        </p>
+        <p id="unpasteurised">Unpasteurised / Unfiltered</p>
+        <p id="ingredienterInput">
+          Ingredients: water, BARLEY, WHEAT, hops (Mosaic, Idaho 7, Columbus,
+          Chinook), yeast
+          <br />
+          BYG, KORN, BYGG, OHRA, CEBADA, ORGE, ORZO, GERST, GERSTE / HVEDE,
+          (H)VETE, VEHNÄ, TRIGO, DU BLÉ, GRANO, TARWE, WEIZEN
+        </p>
+        <div id="bryggeriet">
+          <figure>
+            <svg
+              id="miniLogo"
+              data-name="Lag 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 642.8012 197.36"
+            >
+              <path
+                d="M77.51,55.57c9.2-5.02,15.45-14.77,15.45-25.99,0-16.34-13.24-29.58-29.58-29.58s-29.58,13.24-29.58,29.58c0,11.22,6.25,20.98,15.45,25.99-11.2,3.54-25.71,13.14-29.87,39.2L0,197.32h8.45l7.61-43.84h95.3l7.61,43.84h8.45l-19.38-102.55c-4.16-26.05-19.03-35.66-30.52-39.2h-.01ZM40.97,29.58c0-12.38,10.03-22.41,22.41-22.41s22.41,10.03,22.41,22.41-10.03,22.41-22.41,22.41-22.41-10.03-22.41-22.41ZM17.43,145.53l8.82-50.77s4.84-35.02,36.94-34.76c32.1-.25,37.96,34.76,37.96,34.76l8.82,50.77H17.43Z"
+              />
+              <path
+                d="M267.4,112c19.13-3.77,19.43-28.58,19.43-28.58.01-34.1-33.43-32.22-33.43-32.22h-71.98l.63,146.06h71.42s48.89,3.63,48.89-45.11c0-28.93-20.41-38.9-34.96-40.14v-.01ZM189.24,57.37s50.32-.03,57.35-.04c7.04,0,33.4-1.11,33.4,26.21s-29.65,26.41-29.65,26.41l-61.11.1v-52.69l.01.01ZM251.52,190.66h-62.24l.04-73.51h65.18s40.68-1.62,40.68,34.81c0,41-43.66,38.7-43.66,38.7h0Z"
+              />
+              <polygon
+                points="360.46 197.35 466.5 197.31 466.5 189.98 368.41 190.01 368.41 118.64 450.99 118.64 450.99 111.1 368.41 111.1 368.41 61.63 466.5 61.63 466.5 53.99 360.46 53.99 360.46 197.35"
+              />
+              <path
+                d="M642.8,178.98V54.22h-7.97v120.59s.78,13.95-7.88,14.19c-6.01.17-16.09-13.47-16.09-13.47l-85.24-121.3h-12.02v143.13h7.71l.02-134.51,82.21,117.36s13.68,19.2,26.22,16.8c13.43-2.57,13.04-18.03,13.04-18.03h0Z"
+              />
+            </svg>
+          </figure>
+          <p>
+            This beer is brewed at the ÅBEN <br />
+            brewery in Copenhagen, Denmark. <br />
+            www.aabenbryg.dk / @aabenbryg
+          </p>
+        </div>
+        <div id="butiksIndhold">
+          <img id="pant" src="/images/pant.svg" alt="" />
+          <img id="stregkode" src="/images/stregkode.svg" alt="" />
+          <img id="stregkodeTekst" src="/images/stregkodetekst.svg" alt="" />
+        </div>
+      </section>
+      <section id="labelCanvas"></section>
+    </main>
+
+    <!-- JavaScript -->
+
+    <script src="sketch.js"></script>
+    <script src="input.js"></script>
+    <script src="ekspoter.js"></script>
+  </body>
+</html>
