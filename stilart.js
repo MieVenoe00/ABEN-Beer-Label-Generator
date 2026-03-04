@@ -1,7 +1,7 @@
 // ─── Øl-stilarter med farver ──────────────────────────────────────────────────
 const stilarter = [
   { navn: "— Vælg øl-stilart —", bg: "#FAF3ED", tekst: "#1A1A1A" },
-  { navn: "Pilsner", bg: "#FBF4D4", tekst: "#354024" },
+  { navn: "Pilsner", bg: "#fbf5db", tekst: "#2d391c" },
   { navn: "IPA (India Pale Ale)", bg: "#FFF0D0", tekst: "#7A3B00" },
   { navn: "Hazy IPA / NEIPA", bg: "#FFF5C8", tekst: "#6B4400" },
   { navn: "DIPA (Double IPA)", bg: "#FFE4A0", tekst: "#5A2800" },

@@ -47,7 +47,7 @@ body {
 .interface_header {
   top: 0;
   left: 0;
-  width: 80%;
+  width: 95%;
   height: auto;
   margin-top: 2rem;
   padding-top: 15px;
@@ -191,7 +191,6 @@ textarea {
   /* background-color: rgb(208, 86, 86); */
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
 }
 
 /* "Forsiden" med navn og logo*/
@@ -316,18 +315,18 @@ textarea {
 }
 
 .smagsVælgerHjælp {
-  font-size: 12px;
+  font-size: 11px;
   color: rgb(120, 115, 105);
   margin: 0;
   padding: 0;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 #smagsPicker {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  max-height: 200px;
+  max-height: 143px;
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -485,10 +484,10 @@ textarea {
    STILART-PANEL
 ═══════════════════════════════════════════════ */
 
-#stilartWrapper {
+/* #stilartWrapper {
   padding-bottom: 10px;
   border-bottom: 1px solid rgb(163, 157, 143);
-}
+} */
 
 /* ═══════════════════════════════════════════════
    FARVE-PANEL
@@ -497,9 +496,7 @@ textarea {
 #farvePanel {
   width: 220px;
   margin-top: 4px;
-  padding-top: 10px;
   padding-bottom: 10px;
-  border-top: 1px solid rgb(163, 157, 143);
   border-bottom: 1px solid rgb(163, 157, 143);
 }
 
