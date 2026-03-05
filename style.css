@@ -231,9 +231,11 @@ textarea {
 #navn {
   font-size: 2rem;
   font-weight: 700;
+  line-height: 1;
 }
 
 #type {
+  margin-top: 7px;
   font-size: 1.5rem;
   font-weight: 700;
 }

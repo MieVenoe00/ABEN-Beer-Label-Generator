@@ -1,43 +1,59 @@
 const labelElement = document.querySelector(".label");
 
-// ─── Hent alle SVG <img> og sæt dem midlertidigt som base64 ──────────────────
-// html2canvas kan ikke rendere SVG-filer fra <img src="...svg"> direkte.
-// Vi fetcher dem (same-origin på Netlify), konverterer til base64 data-URI,
-// og gendanner de originale src-stier efter capture.
-async function inlineSVGs() {
+// ─── Erstat <img src="...svg"> med ægte inline <svg> ─────────────────────────
+// html2canvas kan ikke rendere SVG via <img> — men kan godt rendere inline <svg>.
+// Vi fetcher SVG-teksten, parser den, swapper elementet, og gendanner bagefter.
+async function inlineSVGElements() {
   const imgs = [...labelElement.querySelectorAll('img[src$=".svg"]')];
   const restore = [];
 
-  await Promise.all(imgs.map(async (img) => {
+  for (const img of imgs) {
     const src = img.getAttribute("src");
     try {
-      const res  = await fetch(src);
-      const text = await res.text();
-      const b64  = btoa(unescape(encodeURIComponent(text)));
-      img.setAttribute("src", "data:image/svg+xml;base64," + b64);
-      restore.push({ img, src });
+      const res    = await fetch(src);
+      const text   = await res.text();
+      const parser = new DOMParser();
+      const doc    = parser.parseFromString(text, "image/svg+xml");
+      const svgEl  = doc.querySelector("svg");
+
+      if (!svgEl) continue;
+
+      // Kopiér dimensioner og styling fra <img> til <svg>
+      svgEl.setAttribute("width",  img.offsetWidth  || img.getAttribute("width")  || "auto");
+      svgEl.setAttribute("height", img.offsetHeight || img.getAttribute("height") || "auto");
+      svgEl.style.cssText = img.style.cssText;
+
+      // Kopiér id og klasser
+      if (img.id)        svgEl.id = img.id;
+      if (img.className) svgEl.setAttribute("class", img.getAttribute("class"));
+
+      img.parentNode.replaceChild(svgEl, img);
+      restore.push({ svgEl, img });
     } catch (e) {
-      console.warn("SVG fetch fejlede:", src, e);
+      console.warn("SVG inline fejlede:", src, e);
     }
-  }));
+  }
 
   return restore;
 }
 
-function restoreSVGs(restore) {
-  restore.forEach(({ img, src }) => img.setAttribute("src", src));
+function restoreSVGElements(restore) {
+  restore.forEach(({ svgEl, img }) => {
+    svgEl.parentNode.replaceChild(img, svgEl);
+  });
 }
 
 // ---------- JPG ----------
 document.getElementById("gemJPG").addEventListener("click", async () => {
-  const restore = await inlineSVGs();
+  const restore = await inlineSVGElements();
 
   const canvas = await html2canvas(labelElement, {
     scale: 3,
     useCORS: true,
+    logging: false,
   });
 
-  restoreSVGs(restore);
+  restoreSVGElements(restore);
 
   const link = document.createElement("a");
   link.download = "oel-label.jpg";
@@ -48,7 +64,7 @@ document.getElementById("gemJPG").addEventListener("click", async () => {
 // ---------- PDF ----------
 document.getElementById("gemPDF").addEventListener("click", async () => {
   const { jsPDF } = window.jspdf;
-  const restore = await inlineSVGs();
+  const restore = await inlineSVGElements();
 
   const canvas = await html2canvas(labelElement, {
     scale: 6,
@@ -57,7 +73,7 @@ document.getElementById("gemPDF").addEventListener("click", async () => {
     logging: false,
   });
 
-  restoreSVGs(restore);
+  restoreSVGElements(restore);
 
   const pdf = new jsPDF({
     orientation: "landscape",
@@ -71,14 +87,15 @@ document.getElementById("gemPDF").addEventListener("click", async () => {
 
 // ---------- SVG ----------
 document.getElementById("gemSVG").addEventListener("click", async () => {
-  const restore = await inlineSVGs();
+  const restore = await inlineSVGElements();
 
   const canvas = await html2canvas(labelElement, {
     scale: 3,
     useCORS: true,
+    logging: false,
   });
 
-  restoreSVGs(restore);
+  restoreSVGElements(restore);
 
   const imgData = canvas.toDataURL("image/png");
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
